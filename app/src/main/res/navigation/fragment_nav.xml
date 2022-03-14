@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_nav"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.miko.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_mainFragment_to_cameraFragment2"
+            app:destination="@id/cameraFragment2" />
+        <action
+            android:id="@+id/action_mainFragment_to_micFragment"
+            app:destination="@id/micFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/cameraFragment2"
+        android:name="com.example.miko.CameraFragment"
+        android:label="fragment_camera"
+        tools:layout="@layout/fragment_camera" >
+        <action
+            android:id="@+id/action_cameraFragment2_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/micFragment"
+        android:name="com.example.miko.MicFragment"
+        android:label="fragment_mic"
+        tools:layout="@layout/fragment_mic" >
+        <action
+            android:id="@+id/action_micFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+</navigation>
