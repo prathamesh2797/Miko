@@ -40,6 +40,11 @@ class MicFragment : Fragment() {
     private lateinit var mediaRecorder: MediaRecorder
     var path: String = Environment.getExternalStorageDirectory().toString() + "/myrec.3gp"
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+
+
+        super.onCreate(savedInstanceState)
+    }
 
 
     override fun onCreateView(
@@ -56,11 +61,7 @@ class MicFragment : Fragment() {
             RecordAudio()
             binding.btnPlay.isEnabled= false
 
-            Handler(Looper.getMainLooper()).postDelayed({
-                mediaRecorder.stop()
-                binding.btnPlay.isEnabled= true
 
-            },10000)
         }
 
         binding.btnPlay.setOnClickListener {
@@ -99,10 +100,10 @@ class MicFragment : Fragment() {
 
     }
 
-    private fun RecordAudio(){
+    private fun  RecordAudio(){
         Dexter.withContext(activity)
             .withPermissions(
-                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.RECORD_AUDIO)
             .withListener(object: MultiplePermissionsListener {
                 @SuppressLint("WrongConstant")
@@ -116,6 +117,13 @@ class MicFragment : Fragment() {
                         mediaRecorder.setOutputFile(path)
                         mediaRecorder.prepare()
                         mediaRecorder.start()
+
+
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            mediaRecorder.stop()
+                            binding.btnPlay.isEnabled= true
+
+                        },10000)
 
 
                         Toast.makeText(activity, "Permission Granted", Toast.LENGTH_SHORT).show()
@@ -136,5 +144,6 @@ class MicFragment : Fragment() {
                 }
 
             }).onSameThread().check()
+
     }
 }
